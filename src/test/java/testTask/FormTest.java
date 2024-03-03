@@ -1,7 +1,6 @@
 package testTask;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import jdk.jfr.Category;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -9,8 +8,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,18 +24,16 @@ public class FormTest {
     FormInputsPage inputsPage;
     @BeforeAll
     static void registerDriver() {
-        //Код для исправления совместимости с ChromeDriver 115+
-        //WebDriverManager.chromedriver().clearDriverCache().setup();
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
     }
 
     @BeforeEach
     void setupBrowser() {
-        ChromeOptions options = new ChromeOptions();
+        FirefoxOptions options = new FirefoxOptions();
         //options.addArguments("--incognito");
         //options.addArguments("--headless");
         //options.addArguments("start-maximized");
-        driver = new ChromeDriver(options);
+        driver = new FirefoxDriver(options);
 
         Path sampleFile = Paths.get("src/test/resources/qa-test.html");
         driver.get(sampleFile.toUri().toString());
